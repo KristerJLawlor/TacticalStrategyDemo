@@ -9,7 +9,7 @@ public class UnitActionSystem : MonoBehaviour
     //singleton pattern ensures only one instance of its type exists by checking in awake that it has no duplicates
     public static UnitActionSystem Instance { get; private set; }
 
-    public event EventHandler OnSelectedUnitChanged;  //use delegate to handle event when selected unit is changed
+    public event EventHandler OnSelectedUnitChanged;  //use event delegate to handle event when selected unit is changed by triggering all functions associated with it
     
     [SerializeField] private Unit selectedUnit;
     [SerializeField] private LayerMask unitLayerMask;
@@ -67,7 +67,7 @@ public class UnitActionSystem : MonoBehaviour
         //this delegate's broadcast is being listened to in the UnitSelectedVisual script
         if(OnSelectedUnitChanged != null)
         {
-            OnSelectedUnitChanged(this, EventArgs.Empty);
+            OnSelectedUnitChanged(this, EventArgs.Empty);   //pass unit as parameter
         }
         //OnSelectedUnitChanged?.Invoke(this, EventArgs.Empty); <-shorthand for above code block    
     }

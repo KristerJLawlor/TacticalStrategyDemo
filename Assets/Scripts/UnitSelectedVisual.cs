@@ -16,7 +16,7 @@ public class UnitSelectedVisual : MonoBehaviour
 
     private void Start()
     {
-        //subscribe to listen for changes made by using the delegate "OnSelectUnitChanged"
+        //subscribe to event delegate "OnSelectUnitChanged" to listen for changes made
         //will trigger "UnitactionSystem_OnSelectedUnitChanged" when delegate function is invoked
         UnitActionSystem.Instance.OnSelectedUnitChanged += UnitActionSystem_OnSelectedUnitChanged;
 
