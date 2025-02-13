@@ -3,6 +3,8 @@
 // Using copies allows us to alter the data without affecting the original. References cause us to directly alter the original
 //
 
+
+// This script is for finding and returning the position values an object is located at
 public struct GridPosition
 {
     public int x; 
@@ -16,7 +18,7 @@ public struct GridPosition
 
     public override string ToString()
     {
-        return "x: " + x + "; z: " + z + ";";
+        return "x: " + x + "; z: " + z;
     }
 
 }
