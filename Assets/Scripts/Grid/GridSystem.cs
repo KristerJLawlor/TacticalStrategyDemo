@@ -6,11 +6,13 @@ using UnityEngine;
 public class GridSystem
 {
     private int width;
-    private int length;
-    private float cellSize;
+    private int length; //height
+    private float cellSize; //scalar for the grid matrix
 
     private GridObject[,] gridObjectArray; //2d array for grid positions
-    public GridSystem(int width, int length,float cellSize) 
+
+
+    public GridSystem(int width, int length, float cellSize) 
     { 
         this.width = width;
         this.length = length;
@@ -37,7 +39,7 @@ public class GridSystem
     {
         return new GridPosition(
             Mathf.RoundToInt(worldPosition.x / cellSize),
-            Mathf.RoundToInt(worldPosition.x / cellSize)
+            Mathf.RoundToInt(worldPosition.z / cellSize)
             );
     }
 

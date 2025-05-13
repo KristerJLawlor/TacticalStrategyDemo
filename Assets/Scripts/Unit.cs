@@ -6,11 +6,20 @@ using UnityEngine;
 public class Unit : MonoBehaviour
 {
     [SerializeField] private Animator unitAnimator; //create animator reference
+
     private Vector3 targetPosition;
+    private GridPosition gridPosition; //create grid position reference
 
     private void Awake()
     {
         targetPosition = transform.position;
+    }
+
+    private void Start()
+    {
+        //when the unit starts, it calculates its own grid position and sets itself to that position
+        gridPosition = LevelGrid.Instance.GetGridPosition(transform.position); //set the grid position of the unit to the unit object 
+        LevelGrid.Instance.AddUnitAtGridPosition(gridPosition, this);
     }
 
     private void Update()
@@ -36,6 +45,13 @@ public class Unit : MonoBehaviour
         else
         {
             unitAnimator.SetBool("IsWalking", false);   //set animation to idle
+        }
+
+        GridPosition newGridPosition = LevelGrid.Instance.GetGridPosition(transform.position); //get position of unit from LevelGrid instance
+        if(newGridPosition != gridPosition) //if the unit has moved to a new grid position. Reqires override code in GridPosition.cs
+        {
+            LevelGrid.Instance.UnitMovedGridPosition(this, gridPosition, newGridPosition);
+            gridPosition = newGridPosition; //update the grid position of the unit
         }
     }
 
