@@ -52,4 +52,15 @@ public struct GridPosition : IEquatable<GridPosition>
         return a.x == b.x && a.z == b.z;
     }
 
+    //override the + operator to add two grid positions together
+    public static GridPosition operator +(GridPosition a, GridPosition b)
+    {
+        return new GridPosition(a.x + b.x, a.z + b.z);
+    }
+
+    //override the - operator to subtract two grid positions    
+    public static GridPosition operator -(GridPosition a, GridPosition b)
+    {
+        return new GridPosition(a.x - b.x, a.z - b.z);
+    }
 }

@@ -38,7 +38,7 @@ public class UnitActionSystem : MonoBehaviour
             }
             else
             {
-                selectedUnit.Move(MouseWorld.GetPosition()); //call getposition from class MouseWorld to find where cursor is
+                selectedUnit.GetMoveAction().Move(MouseWorld.GetPosition()); //call getposition from class MouseWorld to find where cursor is
             }
            
         }
