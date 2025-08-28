@@ -42,10 +42,18 @@ public class MoveAction : MonoBehaviour
         }
     }
 
-    public void Move(Vector3 targetPosition)
+    public void Move(GridPosition gridPosition)
     {
-        this.targetPosition = targetPosition;
+        this.targetPosition = LevelGrid.Instance.GetWorldPosition(gridPosition);
     }
+
+
+    public bool IsValidActionGridPosition(GridPosition gridPosition)
+    {
+        List<GridPosition> validGridPositionList = GetValidActionGridPositionList(); //get a list of valid grid positions
+        return validGridPositionList.Contains(gridPosition); //return true if the list contains the grid position
+    }
+
 
     //Get a list of valid grid positions that the unit can move to
     public List<GridPosition> GetValidActionGridPositionList()
@@ -60,7 +68,24 @@ public class MoveAction : MonoBehaviour
             {
                 GridPosition offsetGridPosition = new GridPosition(x, z); //create a new grid position with the offset values
                 GridPosition testGridPosition = unitGridPosition + offsetGridPosition; //add the offset to the unit's current grid position
-                Debug.Log($"Testing grid position: {testGridPosition}"); //log the test grid position
+                
+                if(!LevelGrid.Instance.IsValidGridPosition(testGridPosition))
+                {
+                    continue;
+                }
+                
+                if (unitGridPosition == testGridPosition)
+                {
+                    continue; //skip if the test position is the same as the unit's current position
+                }
+
+                if(LevelGrid.Instance.HasAnyUnitOnGridPOsition(testGridPosition))
+                {
+                    continue; //skip if there is already a unit on the test position
+                }
+
+                validGridPositionList.Add(testGridPosition); //add the valid grid position to the list
+              
             }
         }
 

@@ -62,4 +62,13 @@ public class GridSystem
     {
         return gridObjectArray[gridPosition.x, gridPosition.z];
     }
+
+    //Check if the selected grid position exists within the grid boundaries
+    public bool IsValidGridPosition(GridPosition gridPosition)
+    {
+        return gridPosition.x >= 0 
+            && gridPosition.z >= 0 
+            && gridPosition.x < width 
+            && gridPosition.z < length;
+    }
 }
